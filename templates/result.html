@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Extracted Resume Info</title>
+  </head>
+  <body>
+    <h1>Resume Info</h1>
+    <p><strong>First Name:</strong> {{ first_name }}</p>
+    <p><strong>Last Name:</strong> {{ last_name }}</p>
+    <p><strong>Current Role:</strong> {{ current_role }}</p>
+    <p><strong>Skillset:</strong></p>
+    <ul>
+      {% for skill in skills %}
+      <li>{{ skill }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

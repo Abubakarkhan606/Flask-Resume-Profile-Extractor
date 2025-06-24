@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Resume</title>
+  </head>
+  <body>
+    <h1>Upload Your Resume (PDF)</h1>
+    <form method="POST" action="/extract" enctype="multipart/form-data">
+      <input type="file" name="resume" accept="application/pdf" required />
+      <button type="submit">Extract Info</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+Flask
+request
+openai>=1.0.0
+fitz
+python-dotenv
