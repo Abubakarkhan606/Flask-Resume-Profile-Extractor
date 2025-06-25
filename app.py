@@ -6,7 +6,6 @@ import json
 
 app = Flask(__name__)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-print("OpenAI API Key:", os.getenv("OPENAI_API_KEY"))
 
 def extract_text_from_pdf(pdf_file):
     doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
@@ -26,14 +25,20 @@ def extract_info(text):
     Resume Text:
     {text}
 
+    Calculate the following using extracted data:
+    - Relevant Skills (10 missing skills relevant to Current Role)
+    - Skill Gap (think of 10 skills that are most relevant to the current role, and then give a score out of 10 based on how many of those skills are present in the resume and make that score skill gap with 0 being no skill gap and 10 being a complete skill gap)
+    
     Return the output in JSON format.
     """
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.2
+        temperature=0.1
     )
+
+    print("Response from OpenAI:", response.choices[0].message.content)
 
     return json.loads(response.choices[0].message.content)
 
@@ -51,7 +56,9 @@ def extract():
         first_name=data["First Name"],
         last_name=data["Last Name"],
         current_role=data["Current Role"],
-        skills=data["Skillset"]
+        skills=data["Skillset"],
+        relevant_skills=data["Relevant Skills"],
+        skill_gap=data["Skill Gap"]
     )
 
 if __name__ == '__main__':
