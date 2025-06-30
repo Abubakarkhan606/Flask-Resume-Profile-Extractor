@@ -52,13 +52,33 @@ def extract():
     text = extract_text_from_pdf(file)
     data = extract_info(text)
 
+    return render_template('question.html')
+
+    # return render_template('result.html',
+    #     first_name=data["First Name"],
+    #     last_name=data["Last Name"],
+    #     current_role=data["Current Role"],
+    #     skills=data["Skillset"],
+    #     relevant_skills=data["Relevant Skills"],
+    #     skill_gap=data["Skill Gap"]
+    # )
+
+@app.route('/result', methods=['POST'])
+def result():
+    data = extract_info('resume_text')
+
+    print("Extracted Data:", data)
+    print("Future goals", request.form['future_goals'])
+
     return render_template('result.html',
         first_name=data["First Name"],
         last_name=data["Last Name"],
         current_role=data["Current Role"],
         skills=data["Skillset"],
         relevant_skills=data["Relevant Skills"],
-        skill_gap=data["Skill Gap"]
+        skill_gap=data["Skill Gap"],
+        target_role=request.form['target_role'],
+        future_goals=request.form['future_goals'],
     )
 
 if __name__ == '__main__':
