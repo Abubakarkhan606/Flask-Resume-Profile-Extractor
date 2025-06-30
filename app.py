@@ -68,7 +68,7 @@ def result():
     data = extract_info('resume_text')
 
     print("Extracted Data:", data)
-    print("Future goals", request.form['future_goals'])
+    print("Future goal", request.form['future_goal'])
 
     return render_template('result.html',
         first_name=data["First Name"],
@@ -78,7 +78,7 @@ def result():
         relevant_skills=data["Relevant Skills"],
         skill_gap=data["Skill Gap"],
         target_role=request.form['target_role'],
-        future_goals=request.form['future_goals'],
+        future_goal=request.form['future_goal'],
     )
 
 if __name__ == '__main__':

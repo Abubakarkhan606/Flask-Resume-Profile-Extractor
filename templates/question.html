@@ -1,0 +1,35 @@
+<!-- templates/questions.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Questions</title>
+  </head>
+  <body>
+    <form action="/result" method="POST">
+      <input type="hidden" name="resume_text" value="{{ resume_text }}" />
+
+      <label>What is your target role?</label>
+      <input type="text" name="target_role" required /><br /><br />
+
+      <label>What is your future goal?</label>
+      <textarea name="future_goal" required style="resize: none"></textarea
+      ><br /><br />
+
+      <button type="submit">Next</button>
+    </form>
+
+    <script>
+      const speak = (text) => {
+        const msg = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(msg);
+      };
+
+      window.onload = () => {
+        speak("What is your target role?");
+        setTimeout(() => {
+          speak("What is your future goal?");
+        }, 4000);
+      };
+    </script>
+  </body>
+</html>
